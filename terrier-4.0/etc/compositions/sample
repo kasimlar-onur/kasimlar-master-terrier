@@ -1,0 +1,3 @@
+collection: trec_15
+qrels: /home/onur/TREC-14/HARD/QRels/TREC2005.qrels.txt
+topics: /home/onur/TREC-14/HARD/Topics/05.50.topics.txt

@@ -1,0 +1,191 @@
+<h2 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Import data</h2>
+
+<div>
+    Import new TREC files into the server. Take care to upload valid files, and avoid uploading of the same data
+    multiple times. To avoid inconsistent data, only interrupt an upload if it is really needed.
+</div>
+
+
+<div class="propertyBox" data-ng-init="settingsForm.loadTRECFileList()">
+    <div class="header">Import data</div>
+    <div class="property">
+        <label class="label">
+            Collection:
+        </label>
+
+        <table class="table defineTable">
+            <thead>
+            <tr>
+                <th><img src="img/select.png" alt="select" /></th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in collections">
+                <td>
+                    <input type="radio" name="collection" value="{{item.name}}" ng-model="dataSetSelected" ng-change="settingsForm.changeCollectionSet(item.name)"/>
+                </td>
+                <td class="fileName"><strong>{{ item.name }}</strong></td>
+                <!--<td ng-show="colUploader.isHTML5" nowrap>{{ item.size/1024/1024|number:2 }} MB</td>-->
+            </tr>
+            </tbody>
+        </table>
+
+        <!--<div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"-->
+             <!--accept="image/*" ngf-max-size="20MB" ngf-min-height="100"-->
+             <!--ngf-resize="{width: 100, height: 100}"></div>-->
+
+        <!--<input type="file" ngf-select ng-model="picFile" name="collection"-->
+               <!--accept="text/*" nv-file-select="" uploader="colUploader" ngf-max-size="2MB" required>-->
+
+        <!--&lt;!&ndash;button ng-click="uploadPic(picFile)">Submit</button>-->
+        <!--&lt;!&ndash;div class="button" ngf-select="searchCtrl.upload($file)">Upload on file select</div&ndash;&gt;-->
+
+        <!--<table class="table uploadTable">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Name</th>-->
+                <!--<th ng-show="colUploader.isHTML5">Size</th>-->
+                <!--<th ng-show="colUploader.isHTML5">Progress</th>-->
+                <!--<th>Status</th>-->
+                <!--<th>Actions</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng-repeat="item in colUploader.queue">-->
+                <!--<td class="fileName"><strong>{{ item.file.name }}</strong></td>-->
+                <!--<td ng-show="colUploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>-->
+                <!--<td ng-show="colUploader.isHTML5">-->
+                    <!--<div class="progress" style="margin-bottom: 0;">-->
+                        <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>-->
+                    <!--</div>-->
+                <!--</td>-->
+                <!--<td class="text-center">-->
+                    <!--<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+                    <!--<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+                    <!--<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+                <!--</td>-->
+                <!--<td nowrap>-->
+                    <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
+                        <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">-->
+                        <!--<span class="glyphicon glyphicon-trash"></span> Remove-->
+                    <!--</button>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    </div>
+
+
+
+
+
+
+
+    <div class="property">
+        <label class="label">
+            QRels File:
+        </label>
+        <input type="file" nv-file-select="" uploader="qrelsUploader" name="qrels" ng-file-select="searchCtrl.onFileSelect($files, myModelObj)" >
+
+        <table class="table uploadTable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th ng-show="qrelsUploader.isHTML5">Size</th>
+                <th ng-show="qrelsUploader.isHTML5">Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in qrelsUploader.queue">
+                <td class="fileName"><strong>{{ item.file.name }}</strong></td>
+                <td ng-show="qrelsUploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <td ng-show="qrelsUploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+    <div class="property">
+        <label class="label">
+            Topics File:
+        </label>
+        <input multiple nv-file-select="" uploader="topicsUploader" name="topics" type="file" />
+
+
+        <table class="table uploadTable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th ng-show="topicsUploader.isHTML5">Size</th>
+                <th ng-show="topicsUploader.isHTML5">Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in topicsUploader.queue">
+                <td class="fileName"><strong>{{ item.file.name }}</strong></td>
+                <td ng-show="topicsUploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <td ng-show="topicsUploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="saveButtonContainer saveButton">
+        <button type="submit" class="btn btn-primary"  ng-click="settingsForm.saveDataSet()">Upload files</button>
+        <!--<button ng-click="load()" class="btn btn-primary">CLICK ME</button>-->
+    </div>
+
+</div>
+
+
+
+
+
+

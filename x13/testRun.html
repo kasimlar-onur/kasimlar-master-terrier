@@ -1,0 +1,64 @@
+<h2 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Test run</h2>
+
+<div>
+    Select the configuration files for the test run. The test is evaluated for each configuration file and the
+    results are saved in ... <br/>
+    Furthermore select the search engines which should be used for testing.
+</div>
+
+<div class="propertyBox" id="testSettings" data-ng-init="settingsForm.getSearchEngineConfigs()">
+    <div class="header">Test run settings</div>
+
+    <div class="property">
+        <label class="label">
+            Select compositions for the test run:
+        </label>
+
+        <ul>
+            <li class="testConfigs" ng-repeat="dataSet in dataSetList">
+                <input type="checkbox" ng-model="dataSetSelected" ng-change="settingsForm.changeDataListSet(dataSet)">{{dataSet}}
+                
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="property">
+        <label class="label">
+            Select Terrier configuration file for the test run:
+        </label>
+        <br/>
+
+        <div class="testConfigsBox">
+            <div class="testConfigsHeader">
+                <span style="display: block; float:left; margin-left: 5em">File name</span>
+                <span style="display: block; float: right; margin-right: 5em">reindex</span><br/>
+            </div>
+
+            <ul >
+                <li class="testConfigs" ng-repeat="configFile in terrierConfigResult">
+                    <input type="checkbox" ng-model="isSelected" ng-change="settingsForm.changeConfigListTerrier(configFile.name)">{{configFile.name}}
+                    <input class="reIndexBox" type="checkbox" ng-model="reIndex" ng-change="settingsForm.changeConfigListIndexTerrier(configFile.name)">
+                    <details>
+                        <summary>
+                            Expand to see the description
+                        </summary>
+                        {{configFile.description}}
+                    </details>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="saveButton">
+            <button type="submit" class="btn btn-primary"  ng-click="settingsForm.runTest()">start test</button>
+        </div>
+    </div>
+    <loading></loading>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,115 @@
+<h2 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Define new test compositions</h2>
+
+<div>
+    Define a composition of TREC files (collection, topics, qrels) for a test run. <br/>
+    Click after the selection to the "save as" button and give a convenient name for the defined TREC test composition.
+
+</div>
+
+
+<div class="propertyBox" data-ng-init="settingsForm.loadTRECFileList()">
+    <div class="header">TREC composition</div>
+    <div class="property">
+        <label class="label">
+            Collection:
+        </label>
+
+        <!--button ng-click="uploadPic(picFile)">Submit</button>
+        <!--div class="button" ngf-select="searchCtrl.upload($file)">Upload on file select</div-->
+
+        <table class="table defineTable">
+            <thead>
+            <tr>
+                <th><img src="img/select.png" alt="select" /></th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in collections">
+                <td>
+                    <input type="radio" name="collection" value="{{item.name}}" ng-model="dataSetSelected" ng-change="settingsForm.changeCollectionSet(item.name)"/>
+                </td>
+                <td class="fileName"><strong>{{ item.name }}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="property">
+        <label class="label">
+            QRels File:
+        </label>
+
+        <table class="table defineTable">
+            <thead>
+            <tr>
+                <th><img src="img/select.png" alt="select" /></th>
+                <th>Name</th>
+                <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in qrels">
+                <td>
+                    <input type="checkbox" value="{{item.name}}" ng-model="dataSetSelected" ng-change="settingsForm.changeQrelsSet(item.name)" />
+                </td>
+                <td class="fileName"><strong>{{ item.name }}</strong></td>
+                <td ng-show="qrelsUploader.isHTML5" nowrap>{{ item.size/1024/1024|number:2 }} MB</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="property">
+        <label class="label">
+            Topics File:
+        </label>
+
+        <table class="table defineTable">
+            <thead>
+            <tr>
+                <th><img src="img/select.png" alt="select" /></th>
+                <th>Name</th>
+                <th>Size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in topics">
+                <td>
+                    <input type="checkbox" ng-model="dataSetSelected" value="{{item.name}}" ng-change="settingsForm.changeTopicsSet(item.name)"/>
+                </td>
+                <td class="fileName"><strong>{{ item.name }}</strong></td>
+                <td ng-show="topicsUploader.isHTML5" nowrap>{{ item.size/1024/1024|number:2 }} MB</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="saveButtonContainer saveButton">
+        <button id="opener" type="submit" class="btn btn-primary" onclick="openDialogComp()">save as</button>
+        <!--<button type="submit" class="btn btn-primary"  ng-click="settingsForm.saveDataSet()">Upload files</button>-->
+        <!--<button ng-click="load()" class="btn btn-primary">CLICK ME</button>-->
+    </div>
+
+    <div id="dialogComp" title="Save TREC test composition">
+        <p>Type in a convenient name for the defined TREC test composition.</p>
+        <label for="name">Name: </label>
+        <input id="name" class="myInput" type="text" ng-model="trecCompositionName"/> <br/><br/>
+        <div class="dialogButton">
+            <button type="submit" class="btn btn-primary" onclick="saveTRECTestComposition()">save</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+
+
+
+
+
+

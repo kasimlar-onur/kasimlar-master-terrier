@@ -1,0 +1,235 @@
+<tabset data-ng-init="settingsForm.getSolrElements()">
+    <tab heading="General Properties">
+            <!--<button type="submit" class="btn btn-primary" ng-click="settingsForm.searchSubmit()">Submit Request</button>-->
+
+            <h2>Settings for Solr/Lucene</h2>
+
+            <div>
+                The selected configurations are the configurations for the running Solr/Lucene search engine. Feel free
+                to <br/>
+                change the settings, but keep in mind that the original values are deleted by clicking the save button.
+                <br/>
+                The default configuration can be loaded by clicking 'load default configuration' button.
+            </div>
+
+
+            <div class="propertyBox">
+                <div class="header">Search Handler</div>
+                <div class="property">
+                    <label class="label">
+                        Name:
+                    </label>
+                    <input type=text list=handlerNames>
+                    <datalist id=handlerNames>
+                        <option> Google</option>
+                        <option> IE9</option>
+                    </datalist>
+                </div>
+                <div class="property">
+                    <label class="label">
+                        Class:
+                    </label>
+                    <input ng-model="settingsForm.selectedSearchHandler" type="text" list="handlerClass"/>
+                    <datalist draggable="true" id=handlerClass>
+                        <select id="dummy">
+                            <option ng-repeat="ttl in settingsForm.searchHandlerNames track by $index" value="{{ttl}}"></option>
+                        </select>
+                        <!--<select id="_select" name="_select" ng-model='selectedSearchHandler' ng-options='ttl in searchHandlerNames'></select>-->
+                    </datalist>
+
+                    <div class="subProperty">
+                        <label class="label">Components defined for the selected search handler:</label>
+
+                        <div class="checkBoxField">
+                            <fieldset class="fieldSetClass">
+                                <legend class="boxLegend">search components:</legend>
+                                <ul>
+                                    <li ng-repeat="searchComponent in settingsForm.searchComponents">{{searchComponent}}</li>
+                                </ul>
+
+                            </fieldset>
+                        </div>
+                        <div class="checkBoxField">
+                            <fieldset class="fieldSetClass">
+                                <legend class="boxLegend">default components:</legend>
+                                <ul>
+                                    <li ng-repeat="defaultComponent in settingsForm.defaultComponents">{{defaultComponent}}</li>
+                                </ul>
+                            </fieldset>
+                        </div>
+                        <div class="checkBoxField">
+                            <fieldset class="fieldSetClass">
+                                <legend class="boxLegend">first components:</legend>
+                                <ul>
+                                    <li ng-repeat="firstComponent in settingsForm.firstComponents">{{firstComponent}}</li>
+                                </ul>
+                            </fieldset>
+                        </div>
+                        <div class="checkBoxField">
+                            <fieldset class="fieldSetClass">
+                                <legend class="boxLegend">last components:</legend>
+                                <ul>
+                                    <li ng-repeat="lastComponent in settingsForm.lastComponents">{{lastComponent}}</li>
+                                </ul>
+                            </fieldset>
+                        </div>
+                        <!--<div class="checkBoxField">-->
+                        <!--<div ng-repeat="defaultComponents in defaultComponents">-->
+                        <!--10-->
+                        <!--<div class="action-checkbox">-->
+                        <!--11-->
+                        <!--<input id="{{employee.name}}" type="checkbox" value="{{employee.name}}" ng-checked="selection.indexOf(employee.name) > -1" ng-click="toggleSelection(employee.name)" />-->
+                        <!--12-->
+                        <!--<label for="{{employee.name}}"></label>-->
+                        <!--13-->
+                        <!--{{employee.name}}-->
+                        <!--14-->
+                        <!--</div>-->
+                        <!--15-->
+                        <!--</div>-->
+
+                        <!--<fieldset class="fieldSetClass">-->
+                        <!--<legend class="boxLegend">Last:</legend>-->
+                        <!--<input type="checkbox" name="animal" value="Cat" />Cats-->
+                        <!--<input type="checkbox" name="animal" value="Dog" />Dogs-->
+                        <!--<input type="checkbox" name="animal" value="Bird" />Birds-->
+                        <!--</fieldset>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="propertyBox">
+                <div class="header">Update Handler</div>
+                <div class="property">
+                    <label class="label">
+                        Class:
+                    </label>
+                    <input type=text list=handlerClass value={{settingsForm.updateClassName}}>
+                </div>
+
+                <div class="property">
+                    <div class="subproperty">
+                        <div class="checkBoxField">
+                            <fieldset class="fieldSetClass">
+                                <legend class="boxLegend">auto commit:</legend>
+                                <label class="label">
+                                    maximal time:
+                                </label>
+                                <input type=text value={{settingsForm.autoCommitMaxTime}}><br/>
+                                <label class="label">
+                                    maximal docs:
+                                </label>
+                                <input type=text value={{settingsForm.autoCommitMaxDocs}}><br/>
+                                <label class="label">
+                                    auto soft max docs:
+                                </label>
+                                <input type=text value={{settingsForm.autoSoftCommitMaxDocs}}><br/>
+                                <label class="label">
+                                    auto soft max time:
+                                </label>
+                                <input type=text value={{settingsForm.autoSoftCommitMaxTime}}><br/>
+                                <label class="label">
+                                    commit interval lb:
+                                </label>
+                                <input type=text value={{settingsForm.commitIntervalLowerBound}}><br/>
+                                <label class="label">
+                                    soft commit:
+                                </label>
+                                <input type=checkbox ng-checked="settingsForm.commitWithinSoftCommit"><br/>
+                                <label class="label">
+                                    wait for merges:
+                                </label>
+                                <input type=checkbox ng-checked="settingsForm.indexWriterCloseWaitsForMerges"><br/>
+                                <label class="label">
+                                    openSearcher:
+                                </label>
+                                <input type=checkbox ng-checked="settingsForm.openSearcher"><br/>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="propertyBox">
+                <div class="header">Request Handler</div>
+                <div class="property">
+                    <label class="label">
+                        chain name:
+                    </label>
+                    <input type=text list=requestHandler value=dedupe>
+                    <datalist id=requestHandler>
+                        <option> dedupe</option>
+                    </datalist>
+                </div>
+            </div>
+    </tab>
+    <tab heading="solrconfig.xml">
+        <h2>Settings for Solr/Lucene</h2>
+
+        <div>
+            The text editor above contains the currently used solrConfig.xml. Feel free to edit the configuration but
+            take in mind
+            that the changes can't be reverted to a specific version. By clicking 'revert changes' the last stable
+            solrconfig.xml
+            is used.
+
+        </div>
+
+        <div class="loadSettings">
+
+                <details>
+                    <summary>Expand to switch between configuration files</summary>
+
+                    <div style="float:left">
+
+                        <ul>
+                            <li style="background-color: rgba(158, 158, 174, 0.64); border: 1px solid #90bade !important;">Configuration files</li>
+                            <li class="configFile" ng-repeat="configFile in solrConfigResult">
+                                <a ng-click="searchCtrl.displaySolrConfigDescription(configFile.name)" ng-href="#">{{configFile.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="configDescription" >
+                        Description: <br/>
+                        {{solrConfigFileDescription}}
+                    </div>
+                    <div class="configButton">
+                        <button type="submit" class="btn btn-primary"  ng-click="settingsForm.saveSolrChanges()">load into editor</button>
+                    </div>
+
+                </details>
+
+        </div>
+
+        <div ui-ace="{
+                useWrapMode : true,
+                showGutter: true,
+                mode: 'xml',
+                firstLineNumber: 1,
+                onLoad: aceLoaded,
+                onChange: aceChanged
+                }"
+             ng-model="settingsForm.solrConfigContent">
+        </div>
+        <div class="saveButton">
+
+            <button id="opener" type="submit" class="btn btn-primary" onclick="openDialog()">save as</button>
+            <button type="submit" class="btn btn-primary"  ng-click="settingsForm.saveSolrChanges()">save</button>
+            <button type="submit" class="btn btn-primary"  ng-click="settingsForm.saveSolrChanges()">load default</button>
+        </div>
+
+        <div id="dialog" title="Save config file">
+            <p>Type in a convenient name for the settings file and add a description.</p>
+            <label for="name">File: </label>
+            <input id="name" class="myInput" type="text" /> <br/><br/>
+            <label for="description">Description: </label>
+            <textarea id="description" rows="4" cols="42" type="text" />
+            <div class="dialogButton">
+                <button type="submit" class="btn btn-primary" onclick="closeDialog()">save</button>
+            </div>
+        </div>
+    </tab>
+</tabset>
+<script src="js/main.js"></script>
+

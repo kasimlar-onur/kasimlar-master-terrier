@@ -1,0 +1,84 @@
+<tabset data-ng-init="settingsForm.getTerrierElements()">
+    <tab heading="terrier.properties">
+        <h2>Settings for Terrier</h2>
+
+        <div>
+            The text editor above contains the currently used terrier.properties. Feel free to edit the configuration but
+            take in mind
+            that the changes can't be reverted to a specific version. By clicking 'revert changes' the last stable
+            terrier.properties is used.
+        </div>
+
+        <div class="loadSettings">
+
+            <details>
+                <summary>Expand to switch between configuration files</summary>
+
+                <div id="configFileContainer" style="float:left">
+
+                    <ul id="configFileList">
+                        <li style="background-color: rgba(158, 158, 174, 0.64); border: 1px solid #90bade !important;">Configuration files</li>
+                        <li class="configFile" ng-repeat="configFile in terrierConfigResult">
+                            <a ng-click="searchCtrl.displayTerrierConfigDescription (configFile.name)" ng-href="#">{{configFile.name}}</a>
+                        </li>
+                    </ul>
+                    <div class="configFileMsg" />
+                </div>
+                <div class="configDescription" >
+                    Description: <br/>
+                    {{terrierConfigFileDescription}}
+                </div>
+                <div class="configButton">
+                    <button type="submit" class="btn btn-primary"  ng-click="settingsForm.loadTerrierEditor()">load into editor</button>
+                </div>
+
+            </details>
+
+        </div>
+
+
+        <div ui-ace="{
+                useWrapMode : true,
+                showGutter: true,
+                mode: 'properties',
+                firstLineNumber: 1,
+                onLoad: aceLoaded,
+                onChange: aceChanged
+                }"
+             ng-model="settingsForm.terrierConfigContent">
+        </div>
+        <div class="saveButton">
+            <button id="opener" type="submit" class="btn btn-primary" onclick="openDialog()">save as</button>
+            <button type="submit" class="btn btn-primary" ng-click="settingsForm.saveSolrChanges()">save</button>
+            <!--<button type="submit" class="btn btn-primary" ng-click="settingsForm.saveSolrChanges()">load default</button>-->
+        </div>
+
+        <div id="dialog" title="Save config file">
+            <p>Type in a convenient name for the settings file and add a description.</p>
+            <label for="name">File: </label>
+            <input id="name" class="myInput" type="text" /> <br/><br/>
+            <label for="description">Description: </label>
+            <textarea id="description" rows="4" cols="42" type="text" />
+            <div class="dialogButton">
+                <button type="submit" class="btn btn-primary" onclick="saveNewTerrierConfigFile()">save</button>
+            </div>
+        </div>
+
+    </tab>
+
+</tabset>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+//        if ($("#configFileList li").length == 2) {
+//            $("#configFileList").hide();
+//            $(".configDescription").hide();
+//            $(".configButton").hide();
+//            $(".configFileMsg").append("No configuration files are found. Please check if the server is running.");
+////            $(".configFileMsg").visible();
+//        }
+    });
+</script>
+
+<script src="js/main.js"></script>

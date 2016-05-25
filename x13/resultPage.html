@@ -1,0 +1,36 @@
+<tabset data-ng-init="settingsForm.searchSubmit()">
+   <tab heading="Terrier results">
+        <h2>Terrier Results</h2>
+        <table class="thinBorderTable">
+            <tbody>
+            <tr>
+                <th>filename</th>
+                <th>path</th>
+                <th>score</th>
+            </tr>
+            <tr ng-repeat="result in searchForm.terrierResults" ng-class="{true: 'coloredTr', false:''}[$index % 2 == 0]">
+                <td>{{result.fileName}}</td>
+                <td>{{result.path}}</td>
+                <td>{{result.score}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </tab>
+    <tab heading="Solr results">
+        <h2>Solr Results</h2>
+        <table class="thinBorderTable">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>weight</th>
+            </tr>
+            <tr ng-repeat="result in searchForm.solrResults.response.docs" ng-class="{true: 'coloredTr', false:''}[$index % 2 == 0]">
+                <td>{{result.id}}</td>
+                <td>{{result.name}}</td>
+                <td>0</td>
+            </tr>
+        </table>
+    </tab>
+
+</tabset>
